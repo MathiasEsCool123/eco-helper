@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eaf7ea;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2c7a2c;
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#output {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+.recycling-guide {
+    margin-top: 30px;
+    text-align: center;
+    padding: 20px;
+    background: #e0f7fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.character {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.character img {
+    width: 150px;
+    height: auto;
+    animation: idle 1s infinite alternate;
+}
+
+@keyframes idle {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+#recycling-button {
+    padding: 10px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#recycling-button:hover {
+    background-color: #45a049;
+}
+
+#recycling-steps {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #333;
+}

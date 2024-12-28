@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Helper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido a Eco Helper</h1>
+        <p>¡Actúa hoy para un mejor mañana!</p>
+        <button id="advice-button">Obtén un Consejo Ecológico</button>
+        <button id="cause-button">Obtén una Causa Aleatoria</button>
+        <p id="output"></p>
+    </div>
+
+    <div class="recycling-guide">
+        <h2>Aprende a Reciclar Botellas de Plástico</h2>
+        <div class="character">
+            <img id="recycling-character" src="{{ url_for('static', filename='character.png') }}" alt="Personaje de reciclaje">
+        </div>
+        <button id="recycling-button">Mostrar Pasos</button>
+        <ol id="recycling-steps-list">
+            <!-- Los pasos aparecerán aquí -->
+        </ol>
+    </div>
+
+    <script>
+        // Funcionalidad de los botones de consejos y causas
+        document.getElementById('advice-button').addEventListener('click', async () => {
+            const response = await fetch('/advice');
+            const data = await response.text();
+            document.getElementById('output').textContent = data;
+        });
+
+        document.getElementById('cause-button').addEventListener('click', async () => {
+            const response = await fetch('/cause');
+            const data = await response.text();
+            document.getElementById('output').textContent = data;
+        });
+
+        // Lista de pasos para reciclar botellas de plástico
+        const recyclingSteps = [
+            "Lava la botella con agua para eliminar residuos.",
+            "Retira la etiqueta y la tapa de la botella.",
+            "Asegúrate de que la botella esté completamente seca.",
+            "Aplasta la botella para reducir su volumen.",
+            "Coloca la botella en el contenedor de reciclaje correspondiente."
+        ];
+
+        let currentStep = 0;
+
+        // Funcionalidad del botón y los pasos
+        document.getElementById('recycling-button').addEventListener('click', () => {
+            const stepsList = document.getElementById('recycling-steps-list');
+            const characterImage = document.getElementById('recycling-character');
+
+            // Si hay más pasos, añadirlos al listado
+            if (currentStep < recyclingSteps.length) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${currentStep + 1}. ${recyclingSteps[currentStep]}`;
+                stepsList.appendChild(listItem);
+                currentStep++;
+
+                // Cambiar la animación del muñequito
+                characterImage.style.transform = `scale(${1 + currentStep * 0.05})`;
+            } else {
+                const completionMessage = document.createElement('li');
+                completionMessage.textContent = "¡Bien hecho! Ahora sabes cómo reciclar botellas de plástico.";
+                stepsList.appendChild(completionMessage);
+
+                // Reiniciar los pasos
+                currentStep = 0;
+                characterImage.style.transform = "scale(1)";
+            }
+        });
+    </script>
+</body>
+</html>
